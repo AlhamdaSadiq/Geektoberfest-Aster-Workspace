@@ -307,7 +307,12 @@ export default function PageView() {
           <MoreHorizontal className="h-4 w-4" />
         </button>
         {isActionsOpen && (
-          <PageMenu page={{ ...page, isFavorite }} onClose={() => setIsActionsOpen(false)} showRename={false} />
+          <PageMenu
+            page={{ ...page, isFavorite }}
+            onClose={() => setIsActionsOpen(false)}
+            showRename={false}
+            getExportData={() => ({ title: latestTitle.current, content: latestContent.current ?? page.content })}
+          />
         )}
       </div>
 
