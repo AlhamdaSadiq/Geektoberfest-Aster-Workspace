@@ -12,6 +12,7 @@ import { getErrorMessage } from '../services/api'
 import { usePagesStore } from '../store/pagesStore'
 import { useUiStore } from '../store/uiStore'
 import { toast } from '../store/toastStore'
+import { getReadingMinutes } from '../utils/docStats'
 
 const SAVE_DEBOUNCE_MS = 800
 
@@ -29,6 +30,8 @@ export default function PageView() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   // Bumped when the document is replaced from outside the editor (version restore)
   const [editorKey, setEditorKey] = useState(0)
+  // null until the editor reports, so a previous page's count never flashes
+  const [wordCount, setWordCount] = useState(null)
 
   const titleRef = useRef(null)
   const editorRef = useRef(null)
@@ -114,6 +117,7 @@ export default function PageView() {
     let cancelled = false
     setIsLoading(true)
     setLoadError(null)
+    setWordCount(null)
 
     pageService
       .getPage(pageId)
@@ -315,6 +319,11 @@ export default function PageView() {
       />
 
       <div className="relative mb-4 flex items-center justify-end gap-1">
+        {wordCount !== null && (
+          <span className="mr-auto text-xs text-zinc-400 dark:text-zinc-500">
+            {wordCount.toLocaleString()} {wordCount === 1 ? 'word' : 'words'} · {getReadingMinutes(wordCount)} min read
+          </span>
+        )}
         <button
           onClick={handleToggleFavorite}
           disabled={page.isDeleted}
@@ -346,6 +355,7 @@ export default function PageView() {
         editable={!page.isDeleted}
         onChange={handleContentChange}
         onEditorReady={handleEditorReady}
+        onWordCountChange={setWordCount}
       />
 
       {isHistoryOpen && (
