@@ -2,7 +2,7 @@ import PageVersion from '../models/PageVersion.js'
 
 // A new snapshot is only taken when the newest one is at least this old, so a burst of
 // autosaves produces one version rather than one per save
-export const SNAPSHOT_INTERVAL_MS = Number(process.env.VERSION_SNAPSHOT_INTERVAL_MS) || 5 * 60 * 1000
+export const SNAPSHOT_INTERVAL_MS = 5 * 60 * 1000
 export const MAX_VERSIONS_PER_PAGE = 50
 
 const isSameState = (version, page) =>
