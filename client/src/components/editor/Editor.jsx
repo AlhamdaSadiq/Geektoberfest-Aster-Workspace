@@ -67,7 +67,7 @@ export default function Editor({ initialContent, editable = true, onChange, onEd
 
   return (
     <div>
-      {editor && <FloatingToolbar editor={editor} />}
+      {editor && editable && <FloatingToolbar editor={editor} />}
       <EditorContent editor={editor} />
       <UploadStatus />
     </div>
