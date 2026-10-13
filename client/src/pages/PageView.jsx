@@ -345,6 +345,7 @@ export default function PageView() {
             onClose={() => setIsActionsOpen(false)}
             showRename={false}
             onShowHistory={() => setIsHistoryOpen(true)}
+            getExportData={() => ({ title: latestTitle.current, content: latestContent.current ?? page.content })}
           />
         )}
       </div>

@@ -12,6 +12,7 @@ import { TaskList } from '@tiptap/extension-task-list'
 import { TaskItem } from '@tiptap/extension-task-item'
 import SlashCommands from './SlashCommands'
 import FloatingToolbar from './FloatingToolbar'
+import UploadStatus from './UploadStatus'
 import { getEditorWordCount } from '../../utils/docStats'
 
 export default function Editor({ initialContent, editable = true, onChange, onEditorReady, onWordCountChange }) {
@@ -68,6 +69,7 @@ export default function Editor({ initialContent, editable = true, onChange, onEd
     <div>
       {editor && editable && <FloatingToolbar editor={editor} />}
       <EditorContent editor={editor} />
+      <UploadStatus />
     </div>
   )
 }
