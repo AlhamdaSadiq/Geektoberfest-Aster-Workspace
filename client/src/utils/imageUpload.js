@@ -40,7 +40,7 @@ export const uploadImageToEditor = async (editor, file) => {
 
     // The user may have left the page while the upload ran
     if (editor.isDestroyed) return
-    const src = `${String(api.defaults.baseURL).replace(/\/$/, '')}/uploads/${data.data.upload.id}`
+    const src = data.data.upload.url
     const position = Math.min(insertAt, editor.state.doc.content.size)
     editor
       .chain()
